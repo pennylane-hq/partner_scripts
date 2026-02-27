@@ -5,7 +5,7 @@ on:
 jobs:
   pre-commit:
     name: pre-commit
-    runs-on: [self-hosted, jeancaisse-graviton-v2]
+    runs-on: [ubuntu-latest]
     steps:
       - name: Clone repository
         uses: actions/checkout@v5
