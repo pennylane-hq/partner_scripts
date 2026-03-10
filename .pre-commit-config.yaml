@@ -1,0 +1,56 @@
+# Pre-commit configuration for PSE Scripts
+
+repos:
+  # Basic file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      # General file checks
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-merge-conflict
+
+      # YAML files
+      - id: check-yaml
+        files: \.(yaml|yml)$
+
+      # Python files
+      - id: check-ast
+        files: \.py$
+      - id: check-docstring-first
+        files: \.py$
+
+      # JSON files (if any)
+      - id: check-json
+        files: \.json$
+
+  # Python code formatting
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        language_version: python3
+        files: \.py$
+
+  # Python linting
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        files: \.py$
+
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.35.0
+    hooks:
+      - id: markdownlint
+        files: \.md$
+        args: [--disable, MD013, MD033, MD041]  # Disable line length, HTML tags, and first line header rules
+
+  - repo: https://github.com/pennylane-hq/pre-commit-hooks
+    rev: ace779fb673db5b440734f533977646284c3d471
+    hooks:
+      - id: actionlint
+      - id: hadolint
